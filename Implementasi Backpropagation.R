@@ -65,8 +65,8 @@ loss_func <- function(nn){
 }
 
 loss_dataset <- data.frame(
-  iteration = 1:2000,
-  loss = vector("numeric", length = 2000)
+  iteration = 1:3000,
+  loss = vector("numeric", length = 3000)
 )
 
 
@@ -86,14 +86,14 @@ for (j in seq_len(3000)) {
     
     e_layer <- 0
     e_layer[1] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[1] 
-    e_layer[1] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[2]
-    e_layer[1] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[3]
-    e_layer[1] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[4]
+    e_layer[2] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[2]
+    e_layer[3] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[3]
+    e_layer[4] <- ((my_ann$y[i] - my_ann$output[i]) * sigmoid_turunan(my_ann$output[i])) %*% my_ann$weight2[4]
     
     e_layer <- e_layer * sigmoid_turunan(my_ann$layer)
     
     d_weight1 <- 0
-    d_weight1 <- my_ann$input[i,] %*% e_layer * 0.9
+    d_weight1 <- my_ann$input[i,] %*% e_layer * 0.75
     
     my_ann$weight1 <- my_ann$weight1 + d_weight1
     my_ann$weight2 <- my_ann$weight2 + d_weight2
